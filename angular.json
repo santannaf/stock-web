@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "stock-monitoring"
+    }
+  },
+  "defaultProject": "stock-monitoring",
+  "cli": {
+    "analytics": false
+  }
 }

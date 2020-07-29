@@ -1,0 +1,74 @@
+<div class="container-fluid home">
+  <div class="container-fluid header">
+    <header></header>
+  </div>
+
+  <div class="container bodyStock">
+
+    <div class="container actionButton">
+      <button type="button" class="btn btn-dark createProductStyle" (click)="createProduct()">Inserir um produto</button>
+      <button type="button" class="btn btn-success" (click)="loadStock()">Iniciar Estoque</button>
+    </div>
+
+    <table
+      class="table table-hover table-light"
+      *ngIf="stocksWithProducts$ | async as stocks; else loadingError"
+    >
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" class="text-center">#</th>
+          <th scope="col" class="text-center">Nome</th>
+          <th scope="col" class="text-center">Items</th>
+          <th scope="col" class="text-center">Valor do Estoque</th>
+          <th scope="col" class="text-center">Classificação</th>
+          <th scope="col" class="text-center">Consumo do Estoque</th>
+          <th scope="col" class="text-center">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stocks">
+          <td>{{ stock.id }}</td>
+          <td>{{ stock.name }}</td>
+          <td>{{ stock.items }}</td>
+          <td class="text-center">
+            {{ stock.valueStock | currency: "BRL":"symbol":"1.2-2":"pt-BR" }}
+          </td>
+          <td
+            [ngStyle]="{
+              color: setBackgroundColorByRule(stock.classification.id)
+            }"
+            class="d-flex justify-content-space-evenly align-items-center pl-4"
+            style="font-size: 12pt; font-weight: 800;"
+          >
+            {{ stock.classification.description }}
+          </td>
+          <td class="text-center">{{ stock.rateConsumer }}</td>
+          <td>
+            <span class="float-right">
+              <button class="btn btn-outline-warning mb-1 btn-sm" (click)="updateStock(stock)">
+                Atualizar
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #loadingError>
+      <div *ngIf="error$ | async; else loading">
+        Erro ao carregar dados do estoque.
+      </div>
+      <ng-template #loading>
+        <div class="container d-flex align-items-center justify-content-center">
+          <div
+            class="spinner-border text-success"
+            role="status"
+            style="width: 3rem; height: 3rem;"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </ng-template>
+    </ng-template>
+  </div>
+</div>

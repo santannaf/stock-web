@@ -1,0 +1,56 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">{{ title }}</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="onClose()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="needs-validation" novalidate [formGroup]="formProduct">
+      <div class="form-row">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nome do produto"
+            formControlName="name"
+          />
+        </div>
+        <div class="col">
+          <input
+            currencyMask
+            type="text"
+            class="form-control priceProduct"
+            placeholder="Preço"
+            formControlName="price"
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger"
+      data-dismiss="modal"
+      (click)="onClose()"
+    >
+      {{ cancelTxt }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="onConfirm()"
+      [disabled]="this.formProduct.invalid"
+    >
+      {{ okTxt }}
+    </button>
+  </div>
+</div>

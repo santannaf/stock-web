@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Ranchers&display=swap');
+
+.stockNavBar {
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #fff;
+}
+
+.navBarCenter {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.logo a {
+  text-decoration: none;
+  font-size: 22pt;
+  font-family: 'Ranchers', cursive;
+  /* color: rgb(20, 170, 75); */
+  color: #606060;
+}
+
+.links {
+  margin-left: 50px;
+}
+
+.links a {
+  text-decoration: none;
+  font-size: 14pt;
+  color: #606060;
+}
