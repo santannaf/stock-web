@@ -9,8 +9,7 @@ import { environment } from './../../../environments/environment.prod';
 })
 export class HomeService {
 
-  // private readonly API = `${environment.API}`;
-  private readonly API = `http://localhost:5000/api`;
+  private readonly API = `${environment.API}`;
 
   constructor(private http: HttpClient) { }
 
