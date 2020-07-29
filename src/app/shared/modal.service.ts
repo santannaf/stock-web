@@ -35,7 +35,6 @@ export class ModalService {
   }
 
   showMessageSetProduct(message: string, type: AlertTypesEnum, dismissTimeout?: number) {
-    console.log('aquiii')
     const bsModalRef: BsModalRef = this.modalService.show(ModalSetProductComponent);
     bsModalRef.content.type = type;
     bsModalRef.content.message = message;
@@ -46,7 +45,6 @@ export class ModalService {
   }
 
   showMessageUpdateStock(message: string, type: AlertTypesEnum, dismissTimeout?: number) {
-    console.log('aquiii')
     const bsModalRef: BsModalRef = this.modalService.show(ModalUpdateStockComponent);
     bsModalRef.content.type = type;
     bsModalRef.content.message = message;
