@@ -53,25 +53,31 @@ export class HomeComponent implements OnInit {
     ).subscribe();
   }
 
-  loadStock() {
-    const resp$ = this.modalService.showMessageSetProduct("Escolher produto para carregamento do estoque", AlertTypesEnum.INFO);
-    resp$.asObservable().pipe(
-      take(1),
-      tap(
-        success => {
-          if (!success) return EMPTY;
-          this.homeService.loadStocks(success).subscribe(
-            success => {
-              this.modalService.showMessage('Carregamento de estoque concluído', AlertTypesEnum.SUCCESS, 2000);
-              this.onRefresh();
-            },
-            error => {
-              this.modalService.showMessage('Falha no carregamento de estoque', AlertTypesEnum.DANGER, 2000)
-            }
-          )
-        }
-      )
-    ).subscribe();
+  async loadStock() {
+    const products = await this.homeService.listProducts();
+    if (products.length === 0) {
+      this.modalService.showMessage('Não existem produtos cadastrados. Cadastre um produto antes de iniciar o estoque', AlertTypesEnum.WARNING)
+    }
+    else {
+      const resp$ = this.modalService.showMessageSetProduct("Escolher produto para carregamento do estoque", AlertTypesEnum.INFO);
+      resp$.asObservable().pipe(
+        take(1),
+        tap(
+          success => {
+            if (!success) return EMPTY;
+            this.homeService.loadStocks(success).subscribe(
+              success => {
+                this.modalService.showMessage('Carregamento de estoque concluído', AlertTypesEnum.SUCCESS, 2000);
+                this.onRefresh();
+              },
+              error => {
+                this.modalService.showMessage('Falha no carregamento de estoque', AlertTypesEnum.DANGER, 2000)
+              }
+            )
+          }
+        )
+      ).subscribe();
+    }
   }
 
   updateStock(stock: CustomStockWithProducts) {
